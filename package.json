@@ -1,0 +1,17 @@
+{
+  "name": "tennisnetwork",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run dev --prefix packages/client\" \"npm run dev --prefix packages/server\"",
+    "build": "concurrently \"npm run build --prefix packages/client\" \"npm run build --prefix packages/server\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^9.0.1",
+    "express": "^4.21.0"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "jsx": "react-jsx", // Use "react" if you're on React 16 or below
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["./node_modules/@types"],
+    "baseUrl": "./",
+    "paths": {
+      "@shared/*": ["../shared/src/*"] // Alias to access shared types
+    }
+  },
+  "include": ["src/**/*", "../shared/src/**/*"], // Include shared folder for type references
+  "exclude": ["node_modules"]
+}
