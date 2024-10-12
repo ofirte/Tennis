@@ -1,8 +1,21 @@
-import mongoose, { Schema } from "mongoose";
-import Class, { IClass } from "./Classes";
-export interface IRecurringClass extends IClass {
-  dayOfWeek: string;
-  time: string;
+import mongoose, { Schema, Types } from "mongoose";
+import Class, { IClass, classZodSchema } from "./Classes";
+import { z } from "zod";
+export const recurringClassZodSchema = classZodSchema.extend({
+  dayOfWeek: z.enum([
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ]),
+  time: z.string(),
+});
+export interface IRecurringClass
+  extends z.infer<typeof recurringClassZodSchema> {
+  _id: Types.ObjectId;
 }
 const recurringClassSchema: Schema = new mongoose.Schema(
   {

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import useHome from "../../api/hooks/useHome";
+import useCreateClasses from "../../api/hooks/useCreateClasses";
 const Home: FC = () => {
-  const { isLoading, data } = useHome();
+  const { isLoading, data } = useCreateClasses();
   return <>Hello {data?.name}</>;
 };
 export default Home;
