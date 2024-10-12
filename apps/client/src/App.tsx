@@ -1,13 +1,12 @@
-import { useState } from "react";
-import { MySharedType } from "@shared/types";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Home from "./components/main/Home";
 
-function App() {
-  const [count, setCount] = useState(0);
-  const x: MySharedType = {
-    id: "1",
-    name: "John Doe",
-  };
-  return <>"Hello, TypeScript with Vite + React!"</>;
+const queryClient = new QueryClient();
+
+export default function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Home />
+    </QueryClientProvider>
+  );
 }
-
-export default App;
