@@ -13,7 +13,7 @@
       "@shared/*": ["../shared/src/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "env.d.ts"],
   "references": [{ "path": "../shared" }],
   "exclude": ["node_modules"]
 }
