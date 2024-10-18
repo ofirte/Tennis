@@ -1,19 +1,19 @@
-import { MySharedType } from "@shared/types";
+import { MySharedType, RecurringClass } from "@shared/types";
 
 interface IClasses {
-  getHello: () => Promise<MySharedType>;
+  CreateRecurringClass: (data: RecurringClass) => Promise<RecurringClass>;
 }
 
 class Classes implements IClasses {
-  async getHello(): Promise<MySharedType> {
+  async CreateRecurringClass(data: RecurringClass): Promise<RecurringClass> {
     const ret = await fetch("/api/classes/create-recurring-class", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ofir: 1 }),
+      body: JSON.stringify(data),
     });
-    const ans: MySharedType = await ret.json();
+    const ans: RecurringClass = await ret.json();
     return ans;
   }
 }

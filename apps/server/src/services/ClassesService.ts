@@ -1,8 +1,7 @@
-import RecurringClass from '../models/Classes/RecurringClass';
+import { RecurringClass as RecurringClassType } from "@shared/types";
+import RecurringClass from "../models/Classes/RecurringClass";
 
-// Service to create a recurring class
-export const createRecurringClass = async (data: any) => {
-  console.log(data, "data")
+export const createRecurringClass = async (data: RecurringClassType) => {
   const recurringClass = new RecurringClass(data);
   return await recurringClass.save();
 };

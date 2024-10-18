@@ -1,13 +1,14 @@
 import mongoose, { Document, Schema, Types } from "mongoose";
+import { ISODate, objectId } from "../../types";
 import { z } from "zod";
 export const classZodSchema = z.object({
   title: z.string(),
   level: z.enum(["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D"]),
-  coach: z.string(),
-  location: z.string(),
+  coach: objectId,
+  location: objectId,
   capacity: z.number(),
-  createdBy: z.string(),
-  createdAt: z.date().default(() => new Date()),
+  createdBy: objectId,
+  createdAt: ISODate,
 });
 export interface IClass extends z.infer<typeof classZodSchema> {
   _id: Types.ObjectId;

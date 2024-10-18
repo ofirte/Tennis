@@ -1,15 +1,15 @@
-import { MySharedType } from "@shared/types";
+import { Class, RecurringClass } from "@shared/types";
 import { useQuery } from "@tanstack/react-query";
 import Classes from "../classes/Classes";
 
-export default function useCreateClasses(): {
+export default function useCreateClasses(payload: RecurringClass): {
   isLoading: boolean;
-  data: MySharedType | undefined;
+  data: RecurringClass | undefined;
 } {
-  const home = new Classes();
+  const classes = new Classes();
   const { isLoading, data } = useQuery({
     queryKey: ["home"],
-    queryFn: () => home.getHello(),
+    queryFn: () => classes.CreateRecurringClass(payload),
   });
   return { isLoading, data };
 }

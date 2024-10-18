@@ -1,28 +1,26 @@
 import { z } from "zod";
 
 export interface MySharedType {
-    id: string;
-    name: string;
-  }
-  export const classZodSchema = z.object({
-    title: z.string(),
-    level: z.enum(["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D"]),
-    coach: z.string(),
-    location: z.string(),
-    capacity: z.number(),
-    createdBy: z.string(),
-    createdAt: z.date().default(() => new Date()),
-  });
-  
-  export const recurringClassZodSchema = classZodSchema.extend({
-    dayOfWeek: z.enum([
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ]),
-    time: z.string(),
-  });
+  id: string;
+  name: string;
+}
+export type Class = {
+  title: string;
+  level: "A+" | "A" | "A-" | "B+" | "B" | "B-" | "C+" | "C" | "C-" | "D";
+  coach: string;
+  location: string;
+  capacity: number;
+  createdBy: string;
+  createdAt: Date;
+};
+export type RecurringClass = Class & {
+  dayOfWeek:
+    | "Sunday"
+    | "Monday"
+    | "Tuesday"
+    | "Wednesday"
+    | "Thursday"
+    | "Friday"
+    | "Saturday";
+  time: string;
+};
