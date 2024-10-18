@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import dataValidationMiddleware from "../middlewares/dataValidationMiddleware";
 import { classZodSchema } from "../models/Classes/Classes";
-import { createRecurringClass } from "../services/ClassesService";
+import { createRecurringClass } from "../controllers/ClassesController";
 const router = express.Router();
 
 router.post(

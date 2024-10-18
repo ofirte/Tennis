@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import ClassesRoutes from "./routes/classes";
+import LocationsRoutes from "./routes/locations";
 import { MySharedType } from "@shared/types";
 
 dotenv.config();
@@ -23,6 +24,7 @@ const x: MySharedType = {
 };
 app.use(express.json());
 app.use("/api/classes", ClassesRoutes);
+app.use("/api/locations", LocationsRoutes);
 
 // Start the server
 app.listen(process.env.PORT, () => {

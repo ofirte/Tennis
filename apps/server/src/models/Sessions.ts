@@ -1,4 +1,3 @@
-import e from "express";
 import mongoose, { Document, Schema } from "mongoose";
 import { objectId } from "src/types";
 import { z } from "zod";

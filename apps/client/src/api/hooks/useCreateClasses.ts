@@ -1,4 +1,4 @@
-import { Class, RecurringClass } from "@shared/types";
+import { Class, RecurringClass } from "@shared/Classes/types";
 import { useQuery } from "@tanstack/react-query";
 import Classes from "../classes/Classes";
 

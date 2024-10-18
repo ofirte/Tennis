@@ -1,4 +1,4 @@
-import { MySharedType, RecurringClass } from "@shared/types";
+import { RecurringClass } from "@shared/Classes/types";
 
 interface IClasses {
   CreateRecurringClass: (data: RecurringClass) => Promise<RecurringClass>;
