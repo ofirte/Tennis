@@ -1,7 +1,10 @@
 import express, { Request, Response } from "express";
 import dataValidationMiddleware from "../middlewares/dataValidationMiddleware";
 import { classZodSchema } from "../models/Classes/Classes";
-import { createRecurringClass } from "../controllers/ClassesController";
+import {
+  createRecurringClass,
+  getRecurringClasses,
+} from "../controllers/ClassesController";
 const router = express.Router();
 
 router.post(
@@ -15,5 +18,11 @@ router.post(
     res.status(200).json({ message: "Recurring class created successfully" });
   }
 );
+
+router.get("/recurring-classes", async (req: Request, res: Response) => {
+  const recurringClasses = await getRecurringClasses();
+  res.set("content-type", "application/json");
+  res.status(200).json(recurringClasses);
+});
 
 export default router;

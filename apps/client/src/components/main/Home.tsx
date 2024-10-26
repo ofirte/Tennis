@@ -5,6 +5,9 @@ import useCreateLocation from "../../api/locations/hooks/useCreateLocation";
 import { Location } from "@shared/Locations/types";
 import { Box, Button } from "@mui/material";
 import ClassCard from "../classes/ClassCard";
+import useRecurringClasses from "../../api/classes/hooks/useRecurringClasses";
+import RecurringClassesGrid from "../classes/RecurringClassesGrid";
+
 const Home: FC = () => {
   const myRecurringClass: RecurringClass = {
     dayOfWeek: "Monday",
@@ -55,7 +58,7 @@ const Home: FC = () => {
       >
         Create Location
       </Button>
-      <ClassCard />
+      <RecurringClassesGrid />
     </Box>
   );
 };
