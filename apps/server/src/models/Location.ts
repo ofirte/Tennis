@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { ISODate, objectId } from "../types";
 import mongoose from "mongoose";
-const LocationZodSchema = z.object({
+export const LocationZodSchema = z.object({
   name: z.string(),
   address: z.string(),
   city: z.string(),

@@ -3,5 +3,5 @@ export type Location = {
   address: string;
   city: string;
   createdBy: string;
-  createdAt: string;
+  createdAt: Date;
 };

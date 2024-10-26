@@ -1,5 +1,5 @@
-import { ILocation } from "src/models/Location";
-
-export const createLocation = async (data: ILocation) => {
-
-}
+import { LocationsService } from "../services/LocationsServices";
+import { Location } from "@shared/Locations/types";
+export const createLocation = async (data: Location) => {
+    LocationsService.createLocation(data);
+};
