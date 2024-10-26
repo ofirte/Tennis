@@ -1,9 +1,11 @@
 import { Storage } from "@google-cloud/storage";
-const storage = new Storage({
-  projectId: "tennistlv",
-  keyFilename: process.env.STORAGE_KEY_PATH, // Update with your service account key file
-});
 
-const assetsBucket = storage.bucket("YOUR_BUCKET_NAME");
+const getStorage = () => {
+  const storage = new Storage({
+    keyFilename: process.env.STORAGE_KEY_PATH,
+  });
 
-export { storage, assetsBucket };
+  const assetsBucket = storage.bucket("tennistlv-assest");
+  return { storage, assetsBucket };
+};
+export default getStorage;
