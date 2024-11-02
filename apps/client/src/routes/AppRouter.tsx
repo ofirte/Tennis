@@ -8,6 +8,7 @@ import LoginPage from "../components/auth/LoginPage";
 import { RoutePath } from "./Routes";
 import IsAuthenticated from "../components/auth/isAuthenticated";
 import MainLayout from "../components/main/MainLayout";
+import SignUpPage from "../components/auth/SignUpPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
         </Route>
       </Route>
       <Route path={RoutePath.LOGIN} element={<LoginPage />} />
+      <Route path={RoutePath.SIGN_UP} element={<SignUpPage />} />
     </Route>
   )
 );

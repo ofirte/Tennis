@@ -4,6 +4,7 @@ const BASE_PATHS = {
   DASHBOARD: "/dashboard",
   PROFILE: "/profile",
   SETTINGS: "/settings",
+  SIGN_UP: "/signup",
 };
 
 export const RoutePath = {

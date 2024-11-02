@@ -1,10 +1,18 @@
 import { FC, useEffect } from "react";
-import { Box, Avatar, Typography, CssBaseline, Container } from "@mui/material";
+import {
+  Box,
+  Avatar,
+  Typography,
+  CssBaseline,
+  Container,
+  Button,
+} from "@mui/material";
 import Form, { TextFieldType } from "../../common/Form";
 import { useAuth } from "./AuthProvider";
 import { useNavigate } from "react-router-dom";
 import RoutePath from "../../routes/Routes";
 import GoogleButton from "./GoogleButton";
+import { useAlert } from "../../common/AlertProvider";
 
 type LoginPageProps = {};
 const LoginPage: FC<LoginPageProps> = () => {
@@ -17,6 +25,7 @@ const LoginPage: FC<LoginPageProps> = () => {
     password: "",
   };
   const { user, loading, login } = useAuth();
+  const { showAlert } = useAlert();
   const navigate = useNavigate();
   useEffect(() => {
     if (user && !loading) {
@@ -59,6 +68,21 @@ const LoginPage: FC<LoginPageProps> = () => {
             type="light"
             label="Sign in with Google"
           />
+          <Button
+            onClick={() => {
+              navigate(RoutePath.SIGN_UP);
+            }}
+          >
+            <Typography
+              variant="subtitle2"
+              sx={{
+                color: ({ palette }) => palette.primary.main,
+              }}
+            >
+              Sign up
+            </Typography>
+          </Button>
+          <Button onClick={() => showAlert("Hello", "info")}>Show Alert</Button>
         </Box>
       </Box>
     </Container>
