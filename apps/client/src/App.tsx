@@ -1,12 +1,16 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Home from "./components/main/Home";
-
+import router from "./routes/AppRouter";
+import { RouterProvider } from "react-router-dom";
+import { ThemeProvider } from "@emotion/react";
+import theme from "./common/Theme";
 const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Home />
-    </QueryClientProvider>
+    <ThemeProvider theme={theme}>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }

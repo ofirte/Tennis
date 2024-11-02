@@ -3,10 +3,9 @@ import useCreateClasses from "../../api/classes/hooks/useCreateClasses";
 import { RecurringClass } from "@shared/Classes/types";
 import useCreateLocation from "../../api/locations/hooks/useCreateLocation";
 import { Location } from "@shared/Locations/types";
-import { Box, Button } from "@mui/material";
-import ClassCard from "../classes/ClassCard";
-import useRecurringClasses from "../../api/classes/hooks/useRecurringClasses";
 import RecurringClassesGrid from "../classes/RecurringClassesGrid";
+import { Box, Button, Typography } from "@mui/material";
+import { useAuth } from "../auth/AuthProvider";
 
 const Home: FC = () => {
   const myRecurringClass: RecurringClass = {
@@ -30,6 +29,7 @@ const Home: FC = () => {
   };
   const { mutate: createRecurringClass } = useCreateClasses();
   const { mutate: createLocation } = useCreateLocation();
+  const { user } = useAuth();
   return (
     <Box
       sx={{
@@ -58,6 +58,7 @@ const Home: FC = () => {
       >
         Create Location
       </Button>
+      <Typography variant="h4">{`Classes for ${user?.displayName}`}</Typography>
       <RecurringClassesGrid />
     </Box>
   );
