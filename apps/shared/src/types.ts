@@ -6,3 +6,5 @@ export interface MySharedType {
 export type StorageFileInfo = {
   url: string;
 };
+
+

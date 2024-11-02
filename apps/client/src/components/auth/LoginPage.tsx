@@ -24,8 +24,7 @@ const LoginPage: FC<LoginPageProps> = () => {
     email: "",
     password: "",
   };
-  const { user, loading, login } = useAuth();
-  const { showAlert } = useAlert();
+  const { user, loading, login, loginWithEmail } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
     if (user && !loading) {
@@ -51,7 +50,7 @@ const LoginPage: FC<LoginPageProps> = () => {
           fields={fields}
           defaultValues={defaultValues}
           onSubmit={(data) => {
-            console.log(data);
+            loginWithEmail(data.email, data.password);
           }}
         />
         <Box
@@ -82,7 +81,6 @@ const LoginPage: FC<LoginPageProps> = () => {
               Sign up
             </Typography>
           </Button>
-          <Button onClick={() => showAlert("Hello", "info")}>Show Alert</Button>
         </Box>
       </Box>
     </Container>

@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import ClassesRoutes from "./routes/classes";
 import LocationsRoutes from "./routes/locations";
 import StorageRoutes from "./routes/storage";
-import { MySharedType } from "@shared/types";
+import UsersRoutes from "./routes/users";
 
 dotenv.config();
 const app = express();
@@ -19,15 +19,11 @@ const connectToDatabase = async () => {
   }
 };
 connectToDatabase();
-const x: MySharedType = {
-  id: "1",
-  name: "Ofir Tene",
-};
 app.use(express.json());
 app.use("/api/classes", ClassesRoutes);
 app.use("/api/locations", LocationsRoutes);
 app.use("/api/storage", StorageRoutes);
-
+app.use("/api/users", UsersRoutes);
 // Start the server
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT}`);

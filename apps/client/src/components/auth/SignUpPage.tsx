@@ -3,6 +3,7 @@ import { FC } from "react";
 import Form, { TextFieldType } from "../../common/Form";
 import { useAuth } from "./AuthProvider";
 import { useNavigate } from "react-router-dom";
+import RoutePath from "../../routes/Routes";
 
 const SignUpPage: FC = () => {
   const fields = [
@@ -13,11 +14,15 @@ const SignUpPage: FC = () => {
       label: "Confirm Password",
       type: TextFieldType.Password,
     },
+    { name: "firstName", label: "First Name", type: TextFieldType.Text },
+    { name: "lastName", label: "Last Name", type: TextFieldType.Text },
   ];
   const defaultValues = {
     email: "",
     password: "",
     confirmPassword: "",
+    firstName: "",
+    lastName: "",
   };
   const navigate = useNavigate();
   const { signUpWithEmail } = useAuth();
@@ -41,7 +46,11 @@ const SignUpPage: FC = () => {
         fields={fields}
         defaultValues={defaultValues}
         onSubmit={async (data) => {
-          await signUpWithEmail(data.email, data.password);
+          console.log(signUpWithEmail)
+          const isSuccessful = await signUpWithEmail(data.email, data.password, data.firstName, data.lastName);
+          if (isSuccessful) {
+            navigate(RoutePath.HOME);
+          }
         }}
       />
     </Container>

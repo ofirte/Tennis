@@ -1,4 +1,3 @@
-// src/components/GenericForm.js
 
 import React, { FC } from "react";
 import { useForm, Controller } from "react-hook-form";
