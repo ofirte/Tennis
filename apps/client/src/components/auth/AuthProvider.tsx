@@ -110,7 +110,6 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
         authType: "local",
         createdAt: new Date(),
       });
-      console.log(res);
       if (!res.status) {
         deleteUser(userCredentials.user);
         showAlert("Error signing up", "error");
