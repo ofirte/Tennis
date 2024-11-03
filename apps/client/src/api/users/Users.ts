@@ -1,11 +1,12 @@
 import { CreateUserResponse, User as UserType } from "@shared/Users/types";
+import { ApiResponse } from "@shared/types";
 
 interface IUser {
-  createUser: (user: UserType) => Promise<CreateUserResponse>;
+  createUser: (user: UserType) => Promise<ApiResponse<CreateUserResponse>>;
 }
 
 class User implements IUser {
-  async createUser(user: UserType): Promise<CreateUserResponse> {
+  async createUser(user: UserType): Promise<ApiResponse<CreateUserResponse>> {
     const ret = await fetch("/api/users", {
       method: "POST",
       headers: {
@@ -13,7 +14,7 @@ class User implements IUser {
       },
       body: JSON.stringify(user),
     });
-    const ans: CreateUserResponse = await ret.json();
+    const ans = await ret.json();
     return ans;
   }
 }

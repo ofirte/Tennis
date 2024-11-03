@@ -17,16 +17,23 @@ import {
   createUserWithEmailAndPassword,
   getAdditionalUserInfo,
   deleteUser,
-  updateProfile
+  UserCredential,
 } from "firebase/auth";
+import { User as UserType } from "@shared/Users/types";
 import { useAlert } from "../../common/AlertProvider";
 import useCreateUser from "../../api/users/hooks/useCreateUser";
+import { FirebaseError } from "firebase/app";
 type AuthContextType = {
   user: User | null;
   login: () => void;
   logout: () => void;
   loginWithEmail: (email: string, password: string) => Promise<boolean>;
-  signUpWithEmail: (email: string, password: string, firstName: string, lastName: string) => Promise<boolean>;
+  signUpWithEmail: (
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string
+  ) => Promise<boolean>;
   loading: boolean;
 };
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
@@ -36,6 +43,22 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const { showAlert } = useAlert();
   const { mutateAsync: createUser, isSuccess } = useCreateUser();
+  const errorCodeToMessage = (errorCode: string): string => {
+    switch (errorCode) {
+      case "auth/email-already-in-use":
+        return "Email is already in use";
+      case "auth/invalid-email":
+        return "Invalid email";
+      case "auth/weak-password":
+        return "Password is too weak";
+      case "auth/user-not-found":
+        return "User not found";
+      case "auth/wrong-password":
+        return "Wrong password";
+      default:
+        return "An error occurred";
+    }
+  };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
@@ -44,28 +67,32 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     return unsubscribe;
   }, []);
 
+  const getUserObject = (user: UserCredential): UserType => {
+    const [firstName, lastName] = user.user.displayName?.split(" ") ?? ["", ""];
+    return {
+      email: user.user.email ?? "",
+      firstName: firstName ?? "",
+      lastName: lastName ?? "",
+      displayName: user.user.displayName ?? "",
+      role: 0,
+      uid: user.user.uid,
+      authType: "google",
+      createdAt: new Date(),
+    };
+  };
+
   const login = async (): Promise<boolean> => {
     try {
       const userCredentials = await signInWithPopup(auth, googleProvider);
       const additionalUserInfo = getAdditionalUserInfo(userCredentials);
       if (additionalUserInfo?.isNewUser) {
-        const res = await createUser({
-          email: userCredentials.user.email ?? "",
-          firstName: "",
-          lastName: "",
-          authType: "google",
-          displayName: userCredentials.user.displayName ?? "",
-          role: 0,
-          uid: userCredentials.user.uid,
-          createdAt: new Date(),
-        });
-        if (!res.status) {
+        const res = await createUser(getUserObject(userCredentials));
+        if (!res?.data?.status) {
           if (additionalUserInfo?.isNewUser) deleteUser(userCredentials.user);
           showAlert("Error signing in", "error");
-          return false;
         }
+        return !!res?.data?.status;
       }
-
       return true;
     } catch (error) {
       showAlert("Error signing in", "error");
@@ -97,9 +124,6 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
         email,
         password
       );
-      updateProfile(userCredentials.user, {
-        displayName: `${firstName} ${lastName}`,
-      });
       const res = await createUser({
         email,
         firstName: firstName,
@@ -110,14 +134,14 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
         authType: "local",
         createdAt: new Date(),
       });
-      if (!res.status) {
+      if (!res?.data?.status) {
         deleteUser(userCredentials.user);
         showAlert("Error signing up", "error");
-        return false;
       }
-      return true;
+      return !!res?.data?.status;
     } catch (error) {
-      showAlert("Error signing up", "error");
+      const typeError = error as FirebaseError;
+      showAlert(errorCodeToMessage(typeError?.code), "error");
       return false;
     }
   };

@@ -10,4 +10,7 @@ export class UsersService {
       return false;
     }
   }
+  public static async getUser(userId: string): Promise<UserType | null> {
+    return User.findById(userId);
+  }
 }
