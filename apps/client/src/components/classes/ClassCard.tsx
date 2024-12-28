@@ -25,7 +25,7 @@ const ClassCard: FC<{ recurringClass: RecurringClassResponse }> = ({
       <CardMedia
         component="img"
         height="140"
-        image={storageCardMediaInfo?.url}
+        image={storageCardMediaInfo?.data?.url}
         alt="class card image"
       />
       <CardContent>

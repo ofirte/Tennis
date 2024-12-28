@@ -1,14 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import Storage from "../storage/Storage";
 import { StorageFileInfo } from "@shared/types";
-export default function useClassCardMedia(): {
-  isLoading: boolean;
-  data: StorageFileInfo | undefined;
-} {
+import useAppQuery from "../hooks/useAppQuery";
+export default function useClassCardMedia() {
   const storage = new Storage();
-  const { data, isLoading } = useQuery({
+  return useAppQuery<StorageFileInfo>({
     queryKey: ["classCardMedia"],
     queryFn: () => storage.getClassCardMedia(),
   });
-  return { data, isLoading };
 }

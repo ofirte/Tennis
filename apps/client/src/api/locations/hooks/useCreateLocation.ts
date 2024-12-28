@@ -1,9 +1,7 @@
-import {
-  UseMutationOptions,
-} from "@tanstack/react-query";
+import { UseMutationOptions } from "@tanstack/react-query";
 import Locations from "../Locations";
 import { Location } from "@shared/Locations/types";
-import useAppMutation from "src/api/hooks/useAppMutation";
+import useAppMutation from "../../../api/hooks/useAppMutation";
 import { ApiResponse } from "@shared/types";
 export default function useCreateLocation(
   options?: UseMutationOptions<

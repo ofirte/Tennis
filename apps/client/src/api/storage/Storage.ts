@@ -1,20 +1,20 @@
 import { RecurringClass } from "@shared/Classes/types";
 import { Location } from "@shared/Locations/types";
-import { StorageFileInfo } from "@shared/types";
+import { ApiResponse, StorageFileInfo } from "@shared/types";
 
 interface IStorage {
-  getClassCardMedia: () => Promise<StorageFileInfo>;
+  getClassCardMedia: () => Promise<ApiResponse<StorageFileInfo>>;
 }
 
 class Storage implements IStorage {
-  async getClassCardMedia(): Promise<StorageFileInfo> {
+  async getClassCardMedia(): Promise<ApiResponse<StorageFileInfo>> {
     const ret = await fetch("/api/storage/tennis-card-media", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const ans: StorageFileInfo = await ret.json();
+    const ans: ApiResponse<StorageFileInfo> = await ret.json();
     return ans;
   }
 }
