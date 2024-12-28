@@ -11,11 +11,7 @@ router.post(
   dataValidationMiddleware({
     bodySchema: LocationZodSchema,
   }),
-  (req, res) => {
-    createLocation(req.body);
-    res.set("content-type", "application/json");
-    res.status(200).json({ message: "Location created successfully" });
-  }
+  createLocation
 );
 
 export default router;

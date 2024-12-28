@@ -1,8 +1,9 @@
 import { Location as LocationType } from "@shared/Locations/types";
-import Location from "../models/Location";
+import Location, { ILocation } from "../models/Location";
 export class LocationsService {
-  public static async createLocation(data: LocationType) {
+  public static async createLocation(data: LocationType): Promise<ILocation> {
     const location = new Location(data);
-    return await location.save();
+    await location.save();
+    return location;
   }
 }
