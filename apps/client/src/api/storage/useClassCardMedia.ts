@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import Storage from "../storage/Storage";
 import { StorageFileInfo } from "@shared/types";
 import useAppQuery from "../hooks/useAppQuery";

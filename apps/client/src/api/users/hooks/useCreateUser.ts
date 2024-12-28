@@ -2,19 +2,17 @@ import { CreateUserResponse, User as UserType } from "@shared/Users/types";
 import { useMutation } from "@tanstack/react-query";
 import Users from "../Users";
 import { ApiResponse } from "@shared/types";
+import useAppMutation, {
+  useAppMutationsOptions,
+} from "src/api/hooks/useAppMutation";
 
-export default function useCreateClasses(): {
-  isSuccess: boolean;
-  isError: boolean;
-  mutate: (payload: UserType) => void;
-  mutateAsync: (payload: UserType) => Promise<ApiResponse<CreateUserResponse>>;
-} {
-  const user = new Users();
-  const { mutate, isError, isSuccess, mutateAsync } = useMutation({
-    mutationFn: async (payload: UserType) => {
-      const res = user.createUser(payload);
-      return res;
-    },
+export default function useCreateClasses(
+  options?: useAppMutationsOptions<CreateUserResponse, UserType, UserType>
+) {
+  const users = new Users();
+  const mutationFn = (payload: UserType) => users.createUser(payload);
+  return useAppMutation<CreateUserResponse, UserType, UserType>({
+    mutationFn,
+    options,
   });
-  return { mutate, isError, isSuccess, mutateAsync };
 }

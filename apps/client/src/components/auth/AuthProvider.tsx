@@ -42,7 +42,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const { showAlert } = useAlert();
-  const { mutateAsync: createUser, isSuccess } = useCreateUser();
+  const { mutateAsync: createUser } = useCreateUser();
   const errorCodeToMessage = (errorCode: string): string => {
     switch (errorCode) {
       case "auth/email-already-in-use":
