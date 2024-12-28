@@ -1,16 +1,27 @@
 import { RecurringClass } from "@shared/Classes/types";
-import { useMutation } from "@tanstack/react-query";
+import { UseMutationOptions } from "@tanstack/react-query";
 import Classes from "../Classes";
+import useAppMutation from "../../../api/hooks/useAppMutation";
+import { ApiResponse } from "@shared/types";
 
-export default function useCreateClasses(): {
-  isSuccess: boolean;
-  isError: boolean;
-  mutate: (payload: RecurringClass) => void;
-} {
+export default function useCreateClasses(
+  options?: UseMutationOptions<
+    ApiResponse<RecurringClass>,
+    RecurringClass,
+    RecurringClass,
+    unknown
+  >
+) {
   const classes = new Classes();
-  const { mutate, isError, isSuccess } = useMutation({
-    mutationFn: (payload: RecurringClass) =>
-      classes.CreateRecurringClass(payload),
+  const mutationFn = (payload: RecurringClass) =>
+    classes.CreateRecurringClass(payload);
+  return useAppMutation<
+    RecurringClass,
+    RecurringClass,
+    RecurringClass,
+    unknown
+  >({
+    mutationFn,
+    options,
   });
-  return { mutate, isError, isSuccess };
 }

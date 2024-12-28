@@ -2,11 +2,13 @@ import { ClassesResponse, RecurringClass } from "@shared/Classes/types";
 import { ApiResponse } from "@shared/types";
 
 interface IClasses {
-  CreateRecurringClass: (data: RecurringClass) => Promise<RecurringClass>;
+  CreateRecurringClass: (data: RecurringClass) => Promise<ApiResponse<RecurringClass>>;
 }
 
 class Classes implements IClasses {
-  async CreateRecurringClass(data: RecurringClass): Promise<RecurringClass> {
+  async CreateRecurringClass(
+    data: RecurringClass
+  ): Promise<ApiResponse<RecurringClass>> {
     const ret = await fetch("/api/classes/create-recurring-class", {
       method: "POST",
       headers: {
@@ -14,7 +16,7 @@ class Classes implements IClasses {
       },
       body: JSON.stringify(data),
     });
-    const ans: RecurringClass = await ret.json();
+    const ans: ApiResponse<RecurringClass> = await ret.json();
     return ans;
   }
   async getRecurringClasses(): Promise<ApiResponse<ClassesResponse>> {

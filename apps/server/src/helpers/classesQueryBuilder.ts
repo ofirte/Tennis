@@ -13,6 +13,7 @@ export const getRecurringClassesInfoPipeline: () => PipelineStage[] = () => {
     {
       $unwind: {
         path: "$locationInfo",
+        preserveNullAndEmptyArrays: true,
       },
     },
     {

@@ -1,4 +1,4 @@
-import { Grid2 as Grid } from "@mui/material";
+import { Box, Container, Grid2 as Grid } from "@mui/material";
 import { RecurringClass } from "@shared/Classes/types";
 import { FC } from "react";
 import useRecurringClasses from "../..//api/classes/hooks/useRecurringClasses";
@@ -8,7 +8,7 @@ const RecurringClassesGrid: FC = () => {
   const { data: classes, isLoading: isLoadingRecurringClasses } =
     useRecurringClasses();
   return (
-    <>
+    <Container>
       {!isLoadingRecurringClasses && (
         <Grid container spacing={3}>
           {classes?.data?.recurringClasses?.map(
@@ -20,7 +20,7 @@ const RecurringClassesGrid: FC = () => {
           )}
         </Grid>
       )}
-    </>
+    </Container>
   );
 };
 

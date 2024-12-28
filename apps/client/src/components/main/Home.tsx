@@ -6,8 +6,9 @@ import { Location } from "@shared/Locations/types";
 import RecurringClassesGrid from "../classes/RecurringClassesGrid";
 import { Box, Button, Typography } from "@mui/material";
 import { useAuth } from "../auth/AuthProvider";
-
+import { useQueryClient } from "@tanstack/react-query";
 const Home: FC = () => {
+  const queryClient = useQueryClient();
   const myRecurringClass: RecurringClass = {
     dayOfWeek: "Monday",
     time: "10:00 AM",
@@ -27,7 +28,13 @@ const Home: FC = () => {
     createdBy: "609c4e8b0f0a6e001f9e4a2a",
     createdAt: new Date(),
   };
-  const { mutate: createRecurringClass } = useCreateClasses();
+  const { mutate: createRecurringClass } = useCreateClasses({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["recurringClasses"],
+      });
+    },
+  });
   const { mutate: createLocation } = useCreateLocation();
   const { user } = useAuth();
   return (

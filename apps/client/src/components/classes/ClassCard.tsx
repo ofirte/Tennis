@@ -30,11 +30,11 @@ const ClassCard: FC<{ recurringClass: RecurringClassResponse }> = ({
       />
       <CardContent>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          level: {recurringClass.level}
+          level: {recurringClass.level ?? "not specified"}
           <br />
-          coach: {recurringClass.coach}
+          coach: {recurringClass.coach ?? "not specified"}
           <br />
-          location: {recurringClass.locationName}
+          location: {recurringClass.locationName ?? "not specified"}
           <br />
           time: {recurringClass.time} {recurringClass.dayOfWeek}
         </Typography>
