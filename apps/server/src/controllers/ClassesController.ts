@@ -1,9 +1,9 @@
 import { sendResponse } from "../utils/apiResponse";
 import { Request, Response } from "express";
 import { ClassesService } from "../services/ClassesService";
-import { ClassesResponse, RecurringClass } from "@shared/classes/types";
+import { ClassesResponse } from "@shared/classes/types";
 import { ApiResponse } from "@shared/types";
-import { IRecurringClass } from "src/models/Classes/RecurringClass";
+import { IRecurringClass } from "../models/Classes/RecurringClass";
 
 // Example usage in a function
 export const createRecurringClass = async (

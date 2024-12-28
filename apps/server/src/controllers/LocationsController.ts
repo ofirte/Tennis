@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import { LocationsService } from "../services/LocationsServices";
 import { Location } from "@shared/Locations/types";
 import { ApiResponse } from "@shared/types";
-import { sendResponse } from "src/utils/apiResponse";
-import { ILocation } from "src/models/Location";
+import { sendResponse } from "../utils/apiResponse";
+import { ILocation } from "../models/Location";
 export const createLocation = async (
   req: Request,
   res: Response
