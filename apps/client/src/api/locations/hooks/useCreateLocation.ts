@@ -10,8 +10,7 @@ export default function useCreateLocation(
   const { mutate, isError, isSuccess } = useAppMutation<
     Location,
     Location,
-    Location,
-    unknown
+    Location
   >({
     mutationFn: (payload: Location) => locations.createLocation(payload),
     options,
