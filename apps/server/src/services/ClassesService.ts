@@ -1,12 +1,23 @@
-import { RecurringClass as RecurringClassType } from "@shared/classes/types";
-import RecurringClass from "../models/Classes/RecurringClass";
-import { getRecurringClassesInfoPipeline } from "../helpers/classesQueryBuilder"; 
+import {
+  ClassesResponse,
+  RecurringClass as RecurringClassType,
+} from "@shared/classes/types";
+import RecurringClass, {
+  IRecurringClass,
+} from "../models/Classes/RecurringClass";
+import { getRecurringClassesInfoPipeline } from "../helpers/classesQueryBuilder";
 export class ClassesService {
-  public static async createRecurringClass(data: RecurringClassType) {
+  public static async createRecurringClass(
+    data: RecurringClassType
+  ): Promise<IRecurringClass> {
     const recurringClass = new RecurringClass(data);
-    return await recurringClass.save();
+    await recurringClass.save();
+    return recurringClass;
   }
-  public static async getRecurringClasses(): Promise<RecurringClassType[]> {
-    return await RecurringClass.aggregate(getRecurringClassesInfoPipeline());
+  public static async getRecurringClasses(): Promise<ClassesResponse> {
+    const recurringClasses = await RecurringClass.aggregate(
+      getRecurringClassesInfoPipeline()
+    );
+    return { recurringClasses };
   }
 }

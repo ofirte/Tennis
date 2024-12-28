@@ -11,11 +11,13 @@ const RecurringClassesGrid: FC = () => {
     <>
       {!isLoadingRecurringClasses && (
         <Grid container spacing={3}>
-          {classes?.recurringClasses?.map((recurringClass: RecurringClass) => (
-            <Grid size={4} key={recurringClass._id}>
-              <ClassCard recurringClass={recurringClass} />
-            </Grid>
-          ))}
+          {classes?.data?.recurringClasses?.map(
+            (recurringClass: RecurringClass) => (
+              <Grid size={4} key={recurringClass._id}>
+                <ClassCard recurringClass={recurringClass} />
+              </Grid>
+            )
+          )}
         </Grid>
       )}
     </>

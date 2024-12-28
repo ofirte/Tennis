@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
+import useAppQuery from "../../hooks/useAppQuery";
 import Classes from "../Classes";
 
 export default function useRecurringClasses() {
   const recurringClasses = new Classes();
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useAppQuery({
     queryKey: ["recurringClasses"],
     queryFn: recurringClasses.getRecurringClasses,
   });

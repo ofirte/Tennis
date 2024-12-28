@@ -1,5 +1,5 @@
 import mongoose, { Document, Schema } from "mongoose";
-import { objectId } from "src/types";
+import { objectId } from "../types";
 import { z } from "zod";
 export const sessionZodSchema = z.object({
   date: z.date(),

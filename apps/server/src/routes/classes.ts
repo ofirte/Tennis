@@ -12,17 +12,9 @@ router.post(
   dataValidationMiddleware({
     bodySchema: classZodSchema,
   }),
-  (req: Request, res: Response) => {
-    createRecurringClass(req.body);
-    res.set("content-type", "application/json");
-    res.status(200).json({ message: "Recurring class created successfully" });
-  }
+  createRecurringClass
 );
 
-router.get("/recurring-classes", async (req: Request, res: Response) => {
-  const recurringClasses = await getRecurringClasses();
-  res.set("content-type", "application/json");
-  res.status(200).json(recurringClasses);
-});
+router.get("/recurring-classes", getRecurringClasses);
 
 export default router;
